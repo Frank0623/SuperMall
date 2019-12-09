@@ -31,3 +31,9 @@ export class Shop{
         this.cGoods=shopInfo.cGoods
     }
 }
+
+export function getRecomment(){
+    return request({
+        url:'/recommend'
+    })
+}

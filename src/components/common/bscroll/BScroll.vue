@@ -40,13 +40,14 @@ export default {
   components: {
   },
   mounted() {
-      this.bscroll=new BScroll(this.$refs.wrapper,{
-          click:true,
-          //监听滚动probeType：0与probeType：1不监听，probeType：3实时监听
-          probeType:this.probeType,
-          //上拉加载
-          pullUpLoad:this.pullUpLoad
-      })
+    this.bscroll=new BScroll(this.$refs.wrapper,{
+      click:true,
+      //监听滚动probeType：0与probeType：1不监听，probeType：3实时监听
+      probeType:this.probeType,
+      //上拉加载
+      pullUpLoad:this.pullUpLoad
+    })
+    console.log(this.bscroll);
     //监听滚动的位置  
     this.bscroll.on('scroll',(position)=>{
       this.$emit('scroll',position)

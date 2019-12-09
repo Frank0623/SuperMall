@@ -117,7 +117,7 @@ export default {
   },
   mounted() {
      //等待goodsListd的image加载完，调用刷新计算高度
-    this.$bus.$on('goodsListImgLoad',()=>{
+      this.$bus.$on('goodsListImgLoad',()=>{
       this.$refs.scroll.refresh() 
     })    
   },

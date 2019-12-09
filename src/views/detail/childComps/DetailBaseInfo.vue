@@ -1,5 +1,6 @@
 <template>
-  <div class="base-info">
+    <!-- 通过Object.keys长度判断goods里有无数据   不判断数据依然能够获取，但columns一开始是一个空数组，会不能取到下标 -->
+  <div class="base-info" v-if="Object.keys(goods).length !==0">
     <div class="title">
         {{goods.title}}
     </div>
@@ -54,7 +55,8 @@ export default {
     padding: 0 5px;
 }
 .title{
-    color: #222
+    color: #222;
+    font-size: 20px;
 }
 .price{
     margin-top: 10px;
