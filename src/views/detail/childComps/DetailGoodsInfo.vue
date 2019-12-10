@@ -29,7 +29,9 @@ export default {
   },
   methods: {
     imgLoad(){
-      this.$bus.$emit('goodsImgLoad')
+      this.$emit('goodsImgLoad')
+      // console.log('goodsImgLoad');
+      
     }
   },
   components: {

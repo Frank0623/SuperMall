@@ -1,6 +1,6 @@
 <template>
-  <swiper>
-    <swiper-item v-for="(item,i) in banners" :key="i" class="detail-item">
+  <swiper class="detail-swiper">
+    <swiper-item v-for="(item,i) in banners" :key="i" >
         <img :src="item" alt="" @load="imgLoad">
     </swiper-item>
   </swiper>
@@ -13,6 +13,7 @@ export default {
   name: '',
   data() {
     return {
+      isLoad:false
     }
   },
   props: {
@@ -23,7 +24,10 @@ export default {
   },
   methods: {
     imgLoad(){
-      this.$bus.$emit('swiperImgLoad')
+       if(!this.isLoad){
+              this.$emit('swiperImgLoad')
+              this.isLoad=true
+          }
     }
   },
   components: {
@@ -34,7 +38,8 @@ export default {
 </script >
 
 <style scoped>
-.detail-item img{
-    height: 450px;    
+.detail-swiper{
+    height: 450px;  
+    overflow: hidden;  
 }
 </style>

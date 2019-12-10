@@ -1,5 +1,5 @@
 <template>
-  <div  ref="wrapper">
+  <div ref="wrapper">
     <div>
       <slot></slot>
     </div>
@@ -23,6 +23,10 @@ export default {
     pullUpLoad:{
       type:Boolean,
       default:false
+    },
+    data:{
+      type:Array,
+      default:()=>[]
     }
   },
   methods: {
@@ -47,15 +51,22 @@ export default {
       //上拉加载
       pullUpLoad:this.pullUpLoad
     })
-    console.log(this.bscroll);
+    // console.log(this.bscroll);
     //监听滚动的位置  
     this.bscroll.on('scroll',(position)=>{
       this.$emit('scroll',position)
+      
+      
     })
     //监听上拉加载
     this.bscroll.on('pullingUp',()=>{
       this.$emit('pullingUp')
     })
+  },
+  watch: {
+    data(){
+      setTimeout(this.refresh,20)
+    }
   },
 }
 </script >

@@ -1,6 +1,6 @@
 <template>
     <div id="hy-swiper">
-      <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+      <div class="swiper" ref="swipertest" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <slot></slot>
       </div>
       <slot name="indicator">
@@ -118,6 +118,7 @@
        */
 		  handleDom: function () {
         // 1.获取要操作的元素
+        // let swiperEl =this.$refs.swipertest;
         let swiperEl = document.querySelector('.swiper');
         let slidesEls = swiperEl.getElementsByClassName('slide');
 

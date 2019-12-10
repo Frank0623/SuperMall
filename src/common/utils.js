@@ -1,3 +1,15 @@
+//防抖
+export function debounce(func,delay){
+  let timer =null
+  return function(...args){
+    if(timer) clearTimeout(timer)
+    timer= setTimeout(()=>{
+      func.apply(this,args)
+    },delay)
+  }
+}
+
+
 //正则表达式--->字符串匹配
 export function formatDate(date, fmt) {
   // 获取年份

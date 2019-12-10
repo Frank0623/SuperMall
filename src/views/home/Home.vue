@@ -26,8 +26,11 @@ import TabControl from 'components/content/tabControl/TabControl'
 import BScroll from 'components/common/bscroll/BScroll'
 import BackTop from 'components/content/backtop/BackTop'
 import {getHomeData,getHomeGoods} from 'network/home.js'
+import {debounce} from 'common/utils'
+// import {itemListenerMixin} from 'common/mixin'
 export default {
   name: 'Home',
+  // mixins:[itemListenerMixin],
   data() {
     return {
       banners:[],
@@ -43,6 +46,7 @@ export default {
       tabOffSetTop:0,
       isTabFixed:false,
       saveY:0,
+      itemImgListener:null
     }
   },
   methods: {
@@ -116,10 +120,16 @@ export default {
     this.getHomeGoods('sell')
   },
   mounted() {
-     //等待goodsListd的image加载完，调用刷新计算高度
-      this.$bus.$on('goodsListImgLoad',()=>{
-      this.$refs.scroll.refresh() 
-    })    
+    //  //等待goodsListd的image加载完，调用刷新计算高度
+      let newRefresh = debounce(this.$refs.scroll.refresh,100)
+      //对监听的事件进行保存
+      this.itemImgListener=()=>{
+        newRefresh()
+      }
+      this.$bus.$on('goodsListImgLoad',this.itemImgListener)    
+    // this.$bus.$on('goodsListImgLoad',()=>{
+    //   this.$refs.scroll.refresh()
+    // })
   },
   activated() {
     this.$refs.scroll.scrollTo(0,this.saveY,0)
@@ -127,6 +137,8 @@ export default {
   },
   deactivated() {
     this.saveY=this.$refs.scroll.bscroll.y
+    //取消全局事件的监听
+    this.$bus.$off('goodsListImgLoad',this.itemImgListener)
   },
 }
 </script >
